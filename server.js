@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 3000;
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve the button demo
+app.get('/button', (req, res) => {
+    res.sendFile(path.join(__dirname, 'button.html'));
+});
+
 // Basic route
 app.get('/', (req, res) => {
     res.send(`
@@ -34,6 +39,19 @@ app.get('/', (req, res) => {
                 h1 { color: #333; margin-bottom: 20px; }
                 p { color: #666; line-height: 1.6; }
                 .success { color: #28a745; font-weight: bold; }
+                .button-link {
+                    display: inline-block;
+                    background: #066afe;
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    margin: 20px 10px;
+                    transition: background 0.3s;
+                }
+                .button-link:hover {
+                    background: #0556d6;
+                }
             </style>
         </head>
         <body>
@@ -42,6 +60,11 @@ app.get('/', (req, res) => {
                 <p class="success">✅ Your Node.js application is successfully deployed on Heroku!</p>
                 <p>This is a simple Express.js web server running on port ${PORT}.</p>
                 <p>You can now build amazing things with this foundation.</p>
+                
+                <div style="margin: 30px 0;">
+                    <a href="/button" class="button-link">🎨 View Figma Button Demo</a>
+                </div>
+                
                 <hr style="margin: 30px 0; border: none; height: 1px; background: #eee;">
                 <p><em>Created with GitHub CLI and deployed to Heroku</em></p>
             </div>
